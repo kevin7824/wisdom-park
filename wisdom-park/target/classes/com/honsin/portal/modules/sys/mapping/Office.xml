@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honsin.portal.modules.sys.dao.OfficeDao">
+
+	<resultMap id="officeMap" type="com.honsin.portal.modules.sys.vo.OfficeVo">
+		<result property="id" column="id"  jdbcType="VARCHAR"/>
+		<result property="parent_id" column="parentId"  jdbcType="VARCHAR"/>
+		<result property="parent_ids" column="parentIds"  jdbcType="VARCHAR"/>
+		<result property="name" column="name"  jdbcType="VARCHAR"/>
+		<result property="sort" column="sort"  jdbcType="INTEGER"/>
+		<result property="area_id" column="areaId"  jdbcType="VARCHAR"/>
+		<result property="code" column="code"  jdbcType="VARCHAR"/>
+		<result property="type" column="type"  jdbcType="VARCHAR"/>
+		<result property="grade" column="grade"  jdbcType="VARCHAR"/>
+		<result property="address" column="address"  jdbcType="VARCHAR"/>
+		<result property="zip_code" column="zipCode"  jdbcType="VARCHAR"/>
+		<result property="master" column="master"  jdbcType="VARCHAR"/>
+		<result property="phone" column="phone"  jdbcType="VARCHAR"/>
+		<result property="fax" column="fax"  jdbcType="VARCHAR"/>
+		<result property="email" column="email"  jdbcType="VARCHAR"/>
+		<result property="useable" column="useable"  jdbcType="INTEGER"/>
+		<result property="primary_person" column="primaryPerson"  jdbcType="VARCHAR"/>
+		<result property="deputy_person" column="deputyPerson"  jdbcType="VARCHAR"/>
+		<result property="create_date" column="createDate"  jdbcType="TIMESTAMP"/>
+		<result property="create_by" column="createBy"  jdbcType="VARCHAR"/>
+		<result property="update_by" column="updateBy"  jdbcType="VARCHAR"/>
+		<result property="update_date" column="updateDate"  jdbcType="TIMESTAMP"/>
+		<result property="del_flag" column="delFlag"  jdbcType="INTEGER"/>
+		
+	</resultMap>
+	
+	<sql id="allColumns">
+		
+		id AS "id",
+		parent_id AS "parentId",
+		parent_ids AS "parentIds",
+		name AS "name",
+		sort AS "sort",
+		area_id AS "areaId",
+		code AS "code",
+		type AS "type",
+		grade AS "grade",
+		address AS "address",
+		zip_code AS "zipCode",
+		master AS "master",
+		phone AS "phone",
+		fax AS "fax",
+		email AS "email",
+		useable AS "useable",
+		primary_person AS "primaryPerson",
+		deputy_person AS "deputyPerson",
+		create_date AS "createDate",
+		create_by AS "createBy",
+		update_by AS "updateBy",
+		update_date AS "updateDate",
+		del_flag AS "delFlag"
+	</sql>
+	
+	<!-- 通过主键查询对象 --> 
+	<select id="get" parameterType="java.lang.String" resultType="com.honsin.portal.modules.sys.vo.OfficeVo">  
+			select <include refid="allColumns"/>  
+			from  Office	 
+			where ID = #{id}  
+	</select> 
+	
+	<!-- 通过对象属性参数查询对象集合 -->
+	<select id="findList" resultType="com.honsin.portal.modules.sys.vo.OfficeVo" parameterType="com.honsin.portal.modules.sys.vo.OfficeVo">
+		SELECT <include refid="allColumns"/>  FROM Office	
+		<where>
+	
+			<if test="parentId!=null">
+				 and parent_id like CONCAT('%','${parentId}','%' )   
+			</if>
+			<if test="parentIds!=null">
+				 and parent_ids like CONCAT('%','${parentIds}','%' )   
+			</if>
+			<if test="name!=null">
+				 and name like CONCAT('%','${name}','%' )   
+			</if>
+			<if test="sort!=null">
+				 and sort = #{sort}
+			</if>
+			<if test="areaId!=null">
+				 and area_id like CONCAT('%','${areaId}','%' )   
+			</if>
+			<if test="code!=null">
+				 and code like CONCAT('%','${code}','%' )   
+			</if>
+			<if test="type!=null">
+				 and type like CONCAT('%','${type}','%' )   
+			</if>
+			<if test="grade!=null">
+				 and grade like CONCAT('%','${grade}','%' )   
+			</if>
+			<if test="address!=null">
+				 and address like CONCAT('%','${address}','%' )   
+			</if>
+			<if test="zipCode!=null">
+				 and zip_code like CONCAT('%','${zipCode}','%' )   
+			</if>
+			<if test="master!=null">
+				 and master like CONCAT('%','${master}','%' )   
+			</if>
+			<if test="phone!=null">
+				 and phone like CONCAT('%','${phone}','%' )   
+			</if>
+			<if test="fax!=null">
+				 and fax like CONCAT('%','${fax}','%' )   
+			</if>
+			<if test="email!=null">
+				 and email like CONCAT('%','${email}','%' )   
+			</if>
+			<if test="useable!=null">
+				 and useable = #{useable}
+			</if>
+			<if test="primaryPerson!=null">
+				 and primary_person like CONCAT('%','${primaryPerson}','%' )   
+			</if>
+			<if test="deputyPerson!=null">
+				 and deputy_person like CONCAT('%','${deputyPerson}','%' )   
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+		ORDER BY update_date DESC
+	</select>
+	
+	
+	<!-- 通过封装属性参数查询对象集合 -->
+	<select id="selectByParams" resultType="com.honsin.portal.modules.sys.vo.OfficeVo" parameterType="Map">
+		SELECT <include refid="allColumns"/>  FROM Office	
+		<where>
+	
+			<if test="parentId!=null">
+				 and parent_id like CONCAT('%','${parentId}','%' )   
+			</if>
+			<if test="parentIds!=null">
+				 and parent_ids like CONCAT('%','${parentIds}','%' )   
+			</if>
+			<if test="name!=null">
+				 and name like CONCAT('%','${name}','%' )   
+			</if>
+			<if test="sort!=null">
+				 and sort = #{sort}
+			</if>
+			<if test="areaId!=null">
+				 and area_id like CONCAT('%','${areaId}','%' )   
+			</if>
+			<if test="code!=null">
+				 and code like CONCAT('%','${code}','%' )   
+			</if>
+			<if test="type!=null">
+				 and type like CONCAT('%','${type}','%' )   
+			</if>
+			<if test="grade!=null">
+				 and grade like CONCAT('%','${grade}','%' )   
+			</if>
+			<if test="address!=null">
+				 and address like CONCAT('%','${address}','%' )   
+			</if>
+			<if test="zipCode!=null">
+				 and zip_code like CONCAT('%','${zipCode}','%' )   
+			</if>
+			<if test="master!=null">
+				 and master like CONCAT('%','${master}','%' )   
+			</if>
+			<if test="phone!=null">
+				 and phone like CONCAT('%','${phone}','%' )   
+			</if>
+			<if test="fax!=null">
+				 and fax like CONCAT('%','${fax}','%' )   
+			</if>
+			<if test="email!=null">
+				 and email like CONCAT('%','${email}','%' )   
+			</if>
+			<if test="useable!=null">
+				 and useable = #{useable}
+			</if>
+			<if test="primaryPerson!=null">
+				 and primary_person like CONCAT('%','${primaryPerson}','%' )   
+			</if>
+			<if test="deputyPerson!=null">
+				 and deputy_person like CONCAT('%','${deputyPerson}','%' )   
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+		ORDER BY update_date DESC
+	</select>
+	
+	<!-- 通过封装属性参数查条数 -->
+	<select id="count" resultType="int" parameterType="Map">
+		SELECT COUNT(ID) FROM Office	
+		<where>
+	
+			<if test="parentId!=null">
+				 and parent_id like CONCAT('%','${parentId}','%' )   
+			</if>
+			<if test="parentIds!=null">
+				 and parent_ids like CONCAT('%','${parentIds}','%' )   
+			</if>
+			<if test="name!=null">
+				 and name like CONCAT('%','${name}','%' )   
+			</if>
+			<if test="sort!=null">
+				 and sort = #{sort}
+			</if>
+			<if test="areaId!=null">
+				 and area_id like CONCAT('%','${areaId}','%' )   
+			</if>
+			<if test="code!=null">
+				 and code like CONCAT('%','${code}','%' )   
+			</if>
+			<if test="type!=null">
+				 and type like CONCAT('%','${type}','%' )   
+			</if>
+			<if test="grade!=null">
+				 and grade like CONCAT('%','${grade}','%' )   
+			</if>
+			<if test="address!=null">
+				 and address like CONCAT('%','${address}','%' )   
+			</if>
+			<if test="zipCode!=null">
+				 and zip_code like CONCAT('%','${zipCode}','%' )   
+			</if>
+			<if test="master!=null">
+				 and master like CONCAT('%','${master}','%' )   
+			</if>
+			<if test="phone!=null">
+				 and phone like CONCAT('%','${phone}','%' )   
+			</if>
+			<if test="fax!=null">
+				 and fax like CONCAT('%','${fax}','%' )   
+			</if>
+			<if test="email!=null">
+				 and email like CONCAT('%','${email}','%' )   
+			</if>
+			<if test="useable!=null">
+				 and useable = #{useable}
+			</if>
+			<if test="primaryPerson!=null">
+				 and primary_person like CONCAT('%','${primaryPerson}','%' )   
+			</if>
+			<if test="deputyPerson!=null">
+				 and deputy_person like CONCAT('%','${deputyPerson}','%' )   
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+	</select>
+	
+	<!-- 添加记录 -->
+	<insert id="insert" parameterType="com.honsin.portal.modules.sys.vo.OfficeVo">
+		INSERT INTO Office	 (
+				id 
+			<if test="parentId!=null">
+				,parent_id
+			</if>
+			<if test="parentIds!=null">
+				,parent_ids
+			</if>
+			<if test="name!=null">
+				,name
+			</if>
+			<if test="sort!=null">
+				,sort
+			</if>
+			<if test="areaId!=null">
+				,area_id
+			</if>
+			<if test="code!=null">
+				,code
+			</if>
+			<if test="type!=null">
+				,type
+			</if>
+			<if test="grade!=null">
+				,grade
+			</if>
+			<if test="address!=null">
+				,address
+			</if>
+			<if test="zipCode!=null">
+				,zip_code
+			</if>
+			<if test="master!=null">
+				,master
+			</if>
+			<if test="phone!=null">
+				,phone
+			</if>
+			<if test="fax!=null">
+				,fax
+			</if>
+			<if test="email!=null">
+				,email
+			</if>
+			<if test="useable!=null">
+				,useable
+			</if>
+			<if test="primaryPerson!=null">
+				,primary_person
+			</if>
+			<if test="deputyPerson!=null">
+				,deputy_person
+			</if>
+			<if test="createDate!=null">
+				,create_date
+			</if>
+			<if test="createBy!=null">
+				,create_by
+			</if>
+			<if test="updateBy!=null">
+				,update_by
+			</if>
+			<if test="updateDate!=null">
+				,update_date
+			</if>
+			<if test="delFlag!=null">
+				,del_flag
+			</if>
+		)
+		VALUES
+		(
+				#{id} 
+			<if test="parentId!=null">
+				,#{parentId}
+			</if>
+			<if test="parentIds!=null">
+				,#{parentIds}
+			</if>
+			<if test="name!=null">
+				,#{name}
+			</if>
+			<if test="sort!=null">
+				,#{sort}
+			</if>
+			<if test="areaId!=null">
+				,#{areaId}
+			</if>
+			<if test="code!=null">
+				,#{code}
+			</if>
+			<if test="type!=null">
+				,#{type}
+			</if>
+			<if test="grade!=null">
+				,#{grade}
+			</if>
+			<if test="address!=null">
+				,#{address}
+			</if>
+			<if test="zipCode!=null">
+				,#{zipCode}
+			</if>
+			<if test="master!=null">
+				,#{master}
+			</if>
+			<if test="phone!=null">
+				,#{phone}
+			</if>
+			<if test="fax!=null">
+				,#{fax}
+			</if>
+			<if test="email!=null">
+				,#{email}
+			</if>
+			<if test="useable!=null">
+				,#{useable}
+			</if>
+			<if test="primaryPerson!=null">
+				,#{primaryPerson}
+			</if>
+			<if test="deputyPerson!=null">
+				,#{deputyPerson}
+			</if>
+			<if test="createDate!=null">
+				,#{createDate}
+			</if>
+			<if test="createBy!=null">
+				,#{createBy}
+			</if>
+			<if test="updateBy!=null">
+				,#{updateBy}
+			</if>
+			<if test="updateDate!=null">
+				,#{updateDate}
+			</if>
+			<if test="delFlag!=null">
+				,#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<!-- 修改记录 -->
+	<update id="update" parameterType="com.honsin.portal.modules.sys.vo.OfficeVo">
+		UPDATE Office	 
+		<set>
+		
+			<if test="parentId!=null">
+				parent_id = #{parentId},
+			</if>
+			<if test="parentIds!=null">
+				parent_ids = #{parentIds},
+			</if>
+			<if test="name!=null">
+				name = #{name},
+			</if>
+			<if test="sort!=null">
+				sort = #{sort},
+			</if>
+			<if test="areaId!=null">
+				area_id = #{areaId},
+			</if>
+			<if test="code!=null">
+				code = #{code},
+			</if>
+			<if test="type!=null">
+				type = #{type},
+			</if>
+			<if test="grade!=null">
+				grade = #{grade},
+			</if>
+			<if test="address!=null">
+				address = #{address},
+			</if>
+			<if test="zipCode!=null">
+				zip_code = #{zipCode},
+			</if>
+			<if test="master!=null">
+				master = #{master},
+			</if>
+			<if test="phone!=null">
+				phone = #{phone},
+			</if>
+			<if test="fax!=null">
+				fax = #{fax},
+			</if>
+			<if test="email!=null">
+				email = #{email},
+			</if>
+			<if test="useable!=null">
+				useable = #{useable},
+			</if>
+			<if test="primaryPerson!=null">
+				primary_person = #{primaryPerson},
+			</if>
+			<if test="deputyPerson!=null">
+				deputy_person = #{deputyPerson},
+			</if>
+			<if test="createDate!=null">
+				create_date = #{createDate},
+			</if>
+			<if test="createBy!=null">
+				create_by = #{createBy},
+			</if>
+			<if test="updateBy!=null">
+				update_by = #{updateBy},
+			</if>
+			<if test="updateDate!=null">
+				update_date = #{updateDate},
+			</if>
+			<if test="delFlag!=null">
+				del_flag = #{delFlag}
+			</if>
+		
+		</set> 
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 逻辑删除数据 -->
+	<update id="deleteByMark" parameterType="com.honsin.portal.modules.sys.vo.OfficeVo">
+        UPDATE Office	 SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 物理删除数据 -->
+	<delete id="deleteByPhysic" parameterType="java.lang.String">
+        DELETE FROM Office	 WHERE id=#{id}
+    </delete>
+</mapper>

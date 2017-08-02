@@ -1,0 +1,56 @@
+package com.honsin.portal.common.service.impl;  
+  
+import java.util.List;
+import java.util.Map;
+
+import com.honsin.portal.common.dao.BaseDao;
+import com.honsin.portal.common.service.BaseService;
+import com.honsin.portal.common.utils.AjaxResult;  
+  
+public class BaseServiceImpl<T> implements BaseService<T> {  
+  
+    protected BaseDao<T> baseDao;
+    
+	@Override
+	public T get(String id) {
+		return baseDao.get(id);
+	}
+
+	@Override
+	public List<T> findList(T entity) {
+		return  baseDao.findList(entity);
+	}
+
+	@Override
+	public int insert(T entity) {
+		return baseDao.insert(entity);
+	}
+
+	@Override
+	public int update(T entity) {
+		return baseDao.update(entity);
+	}
+
+	@Override
+	public int deleteByMark(String id) {
+		return baseDao.deleteByMark(id);
+	}  
+  
+	@Override
+	public int deleteByPhysic(String id) {
+		return baseDao.deleteByPhysic(id);
+	}
+
+	@Override
+	public List<T> selectByParams(Map<String, Object> params) {
+		return baseDao.selectByParams(params);
+	}
+
+	@Override
+	public int count(Map<String, Object> params) {
+		return baseDao.count(params);
+	}
+
+
+
+}  

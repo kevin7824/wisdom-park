@@ -1,0 +1,40 @@
+package com.honsin.portal.modules.project.entity;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.util.Date;
+
+import com.honsin.portal.common.entity.BaseModel;
+
+/**
+ * @deprecated: 本类是与案例管理相关联的BO类
+ * 
+ * Function List: 常用方法
+ * 
+ * @version: Ver. 1.0
+ * 
+ * @author: gdg
+ * 
+ * History:
+ * (author)          (time)            (version)               (desc)
+ * 	gdg              2017-07-27         1.0                     初始化
+ */
+
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class User extends BaseModel{
+
+	private static final long serialVersionUID = 1L;
+
+	private String id;				//ID
+	private String username;				//名称
+	private String account;				//账号
+	private String password;				//密码
+	private String usertype;				//用户类型
+	private String status;				//用户状态
+	private String idCard;				//身份证号
+	private Date lastLogin;				//最后登录时间
+	
+	
+}

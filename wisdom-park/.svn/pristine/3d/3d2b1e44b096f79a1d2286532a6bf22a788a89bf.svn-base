@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honsin.portal.modules.project.dao.TestManagerWayDao">
+
+	<resultMap id="testManagerWayMap" type="com.honsin.portal.modules.project.vo.TestManagerWayVo">
+		<result property="id" column="id"  jdbcType="VARCHAR"/>
+		<result property="file_name" column="fileName"  jdbcType="VARCHAR"/>
+		<result property="version" column="version"  jdbcType="VARCHAR"/>
+		<result property="comment" column="comment"  jdbcType="VARCHAR"/>
+		<result property="download_user_ids" column="downloadUserIds"  jdbcType="VARCHAR"/>
+		<result property="attachment_ids" column="attachmentIds"  jdbcType="VARCHAR"/>
+		<result property="download_count" column="downloadCount"  jdbcType="INTEGER"/>
+		<result property="create_date" column="createDate"  jdbcType="TIMESTAMP"/>
+		<result property="create_by" column="createBy"  jdbcType="VARCHAR"/>
+		<result property="update_by" column="updateBy"  jdbcType="VARCHAR"/>
+		<result property="update_date" column="updateDate"  jdbcType="TIMESTAMP"/>
+		<result property="del_flag" column="delFlag"  jdbcType="INTEGER"/>
+		
+	</resultMap>
+	
+	<sql id="allColumns">
+		
+		id AS "id",
+		file_name AS "fileName",
+		version AS "version",
+		comment AS "comment",
+		download_user_ids AS "downloadUserIds",
+		attachment_ids AS "attachmentIds",
+		download_count AS "downloadCount",
+		create_date AS "createDate",
+		create_by AS "createBy",
+		update_by AS "updateBy",
+		update_date AS "updateDate",
+		del_flag AS "delFlag"
+	</sql>
+	
+	<!-- 通过主键查询对象 --> 
+	<select id="get" parameterType="java.lang.String" resultType="com.honsin.portal.modules.project.vo.TestManagerWayVo">  
+			select <include refid="allColumns"/>  
+			from  test_manager_way	 
+			where ID = #{id}  
+	</select> 
+	
+	<!-- 通过对象属性参数查询对象集合 -->
+	<select id="findList" resultType="com.honsin.portal.modules.project.vo.TestManagerWayVo" parameterType="com.honsin.portal.modules.project.vo.TestManagerWayVo">
+		SELECT <include refid="allColumns"/>  FROM test_manager_way	
+		<where>
+	
+			<if test="fileName!=null">
+				 and file_name like CONCAT('%','${fileName}','%' )   
+			</if>
+			<if test="version!=null">
+				 and version like CONCAT('%','${version}','%' )   
+			</if>
+			<if test="comment!=null">
+				 and comment like CONCAT('%','${comment}','%' )   
+			</if>
+			<if test="downloadUserIds!=null">
+				 and download_user_ids like CONCAT('%','${downloadUserIds}','%' )   
+			</if>
+			<if test="attachmentIds!=null">
+				 and attachment_ids like CONCAT('%','${attachmentIds}','%' )   
+			</if>
+			<if test="downloadCount!=null">
+				 and download_count = #{downloadCount}
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+		ORDER BY update_date DESC
+	</select>
+	
+	
+	<!-- 通过封装属性参数查询对象集合 -->
+	<select id="selectByParams" resultType="com.honsin.portal.modules.project.vo.TestManagerWayVo" parameterType="Map">
+		SELECT <include refid="allColumns"/>  FROM test_manager_way	
+		<where>
+	
+			<if test="fileName!=null">
+				 and file_name like CONCAT('%','${fileName}','%' )   
+			</if>
+			<if test="version!=null">
+				 and version like CONCAT('%','${version}','%' )   
+			</if>
+			<if test="comment!=null">
+				 and comment like CONCAT('%','${comment}','%' )   
+			</if>
+			<if test="downloadUserIds!=null">
+				 and download_user_ids like CONCAT('%','${downloadUserIds}','%' )   
+			</if>
+			<if test="attachmentIds!=null">
+				 and attachment_ids like CONCAT('%','${attachmentIds}','%' )   
+			</if>
+			<if test="downloadCount!=null">
+				 and download_count = #{downloadCount}
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+		ORDER BY update_date DESC
+	</select>
+	
+	<!-- 通过封装属性参数查条数 -->
+	<select id="count" resultType="int" parameterType="Map">
+		SELECT COUNT(ID) FROM test_manager_way	
+		<where>
+	
+			<if test="fileName!=null">
+				 and file_name like CONCAT('%','${fileName}','%' )   
+			</if>
+			<if test="version!=null">
+				 and version like CONCAT('%','${version}','%' )   
+			</if>
+			<if test="comment!=null">
+				 and comment like CONCAT('%','${comment}','%' )   
+			</if>
+			<if test="downloadUserIds!=null">
+				 and download_user_ids like CONCAT('%','${downloadUserIds}','%' )   
+			</if>
+			<if test="attachmentIds!=null">
+				 and attachment_ids like CONCAT('%','${attachmentIds}','%' )   
+			</if>
+			<if test="downloadCount!=null">
+				 and download_count = #{downloadCount}
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+	</select>
+	
+	<!-- 添加记录 -->
+	<insert id="insert" parameterType="com.honsin.portal.modules.project.vo.TestManagerWayVo">
+		INSERT INTO test_manager_way	 (
+				id 
+			<if test="fileName!=null">
+				,file_name
+			</if>
+			<if test="version!=null">
+				,version
+			</if>
+			<if test="comment!=null">
+				,comment
+			</if>
+			<if test="downloadUserIds!=null">
+				,download_user_ids
+			</if>
+			<if test="attachmentIds!=null">
+				,attachment_ids
+			</if>
+			<if test="downloadCount!=null">
+				,download_count
+			</if>
+			<if test="createDate!=null">
+				,create_date
+			</if>
+			<if test="createBy!=null">
+				,create_by
+			</if>
+			<if test="updateBy!=null">
+				,update_by
+			</if>
+			<if test="updateDate!=null">
+				,update_date
+			</if>
+			<if test="delFlag!=null">
+				,del_flag
+			</if>
+		)
+		VALUES
+		(
+				#{id} 
+			<if test="fileName!=null">
+				,#{fileName}
+			</if>
+			<if test="version!=null">
+				,#{version}
+			</if>
+			<if test="comment!=null">
+				,#{comment}
+			</if>
+			<if test="downloadUserIds!=null">
+				,#{downloadUserIds}
+			</if>
+			<if test="attachmentIds!=null">
+				,#{attachmentIds}
+			</if>
+			<if test="downloadCount!=null">
+				,#{downloadCount}
+			</if>
+			<if test="createDate!=null">
+				,#{createDate}
+			</if>
+			<if test="createBy!=null">
+				,#{createBy}
+			</if>
+			<if test="updateBy!=null">
+				,#{updateBy}
+			</if>
+			<if test="updateDate!=null">
+				,#{updateDate}
+			</if>
+			<if test="delFlag!=null">
+				,#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<!-- 修改记录 -->
+	<update id="update" parameterType="com.honsin.portal.modules.project.vo.TestManagerWayVo">
+		UPDATE test_manager_way	 
+		<set>
+		
+			<if test="fileName!=null">
+				file_name = #{fileName},
+			</if>
+			<if test="version!=null">
+				version = #{version},
+			</if>
+			<if test="comment!=null">
+				comment = #{comment},
+			</if>
+			<if test="downloadUserIds!=null">
+				download_user_ids = #{downloadUserIds},
+			</if>
+			<if test="attachmentIds!=null">
+				attachment_ids = #{attachmentIds},
+			</if>
+			<if test="downloadCount!=null">
+				download_count = #{downloadCount},
+			</if>
+			<if test="createDate!=null">
+				create_date = #{createDate},
+			</if>
+			<if test="createBy!=null">
+				create_by = #{createBy},
+			</if>
+			<if test="updateBy!=null">
+				update_by = #{updateBy},
+			</if>
+			<if test="updateDate!=null">
+				update_date = #{updateDate},
+			</if>
+			<if test="delFlag!=null">
+				del_flag = #{delFlag}
+			</if>
+		
+		</set> 
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 逻辑删除数据 -->
+	<update id="deleteByMark" parameterType="com.honsin.portal.modules.project.vo.TestManagerWayVo">
+        UPDATE test_manager_way	 SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 物理删除数据 -->
+	<delete id="deleteByPhysic" parameterType="java.lang.String">
+        DELETE FROM test_manager_way	 WHERE id=#{id}
+    </delete>
+</mapper>

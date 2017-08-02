@@ -1,0 +1,133 @@
+package com.honsin.portal.modules.project.control;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.honsin.portal.common.controller.BaseControl;
+import com.honsin.portal.common.utils.AjaxResult;
+import com.honsin.portal.modules.project.vo.TestManagerWayVo;
+import com.honsin.portal.modules.project.service.TestManagerWayService;
+
+/**
+ * @deprecated: 本类是与测试管理办法相关联的业务层control
+ * History:
+ * (author)          (time)            (version)               (desc)
+ * 	cd            2017-07-31         1.0                     初始化
+ */
+ 
+@RestController
+public class TestManagerWayControl extends BaseControl<TestManagerWayVo>{
+	
+	@Autowired
+	private TestManagerWayService testManagerWayServiceImpl;
+
+	@RequestMapping(value = "/testManagerWay/{id}", method = RequestMethod.GET)
+    public AjaxResult<TestManagerWayVo> getTestManagerWay(@PathVariable("id") String id) {
+    	try {
+    		
+    		TestManagerWayVo vo = testManagerWayServiceImpl.get(id);
+			reAjaxResult.setData(vo);
+			reAjaxResult.setSuccess(AjaxResult.CODE_SUCCESS);
+			reAjaxResult.setEcode(AjaxResult.E000000);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			reAjaxResult.setSuccess(AjaxResult.CODE_FAIL);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_FAILURE);
+			reAjaxResult.setEcode(AjaxResult.E000001);
+		}
+    	reAjaxResult.setCommand("getTestManagerWay");
+        return reAjaxResult;    
+    }    
+  
+    @RequestMapping(value = "/testManagerWay/{id}", method = RequestMethod.DELETE)    
+    public AjaxResult<TestManagerWayVo> deleteTestManagerWay(@PathVariable("id") String id) {    
+    	try {
+    		
+    		testManagerWayServiceImpl.deleteByMark(id);
+			reAjaxResult.setSuccess(AjaxResult.CODE_SUCCESS);
+			reAjaxResult.setEcode(AjaxResult.E000000);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			reAjaxResult.setSuccess(AjaxResult.CODE_FAIL);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_FAILURE);
+			reAjaxResult.setEcode(AjaxResult.E000001);
+		}
+    	reAjaxResult.setCommand("deleteTestManagerWay");
+        return reAjaxResult;   
+    }    
+  
+    @RequestMapping(value = "/testManagerWay", method = RequestMethod.POST)    
+    public AjaxResult<TestManagerWayVo> addTestManagerWay(TestManagerWayVo testManagerWay) {    
+    	try {
+    		testManagerWay.setId(UUID.randomUUID().toString());
+    		testManagerWayServiceImpl.insert(testManagerWay);
+			reAjaxResult.setSuccess(AjaxResult.CODE_SUCCESS);
+			reAjaxResult.setEcode(AjaxResult.E000000);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			reAjaxResult.setSuccess(AjaxResult.CODE_FAIL);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_FAILURE);
+			reAjaxResult.setEcode(AjaxResult.E000001);
+		}
+    	reAjaxResult.setCommand("addTestManagerWay");
+        return reAjaxResult;    
+   }    
+  
+    @RequestMapping(value = "/testManagerWay", method = RequestMethod.PUT)    
+    public AjaxResult<TestManagerWayVo> updateTestManagerWay(TestManagerWayVo testManagerWay) {    
+    	try {
+    		testManagerWayServiceImpl.update(testManagerWay);
+			reAjaxResult.setSuccess(AjaxResult.CODE_SUCCESS);
+			reAjaxResult.setEcode(AjaxResult.E000000);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			reAjaxResult.setSuccess(AjaxResult.CODE_FAIL);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_FAILURE);
+			reAjaxResult.setEcode(AjaxResult.E000001);
+		}
+    	reAjaxResult.setCommand("updateTestManagerWay");
+        return reAjaxResult; 
+    }    
+  
+    @RequestMapping(value = "/testManagerWay", method = RequestMethod.PATCH)    
+    public AjaxResult<TestManagerWayVo>  listTestManagerWay(@RequestParam(value = "pageNum", required = true) Integer pageNum,
+    		@RequestParam(value = "pageSize", required = true) Integer pageSize) {    
+    	try {
+    		//分页条件
+    		PageHelper.startPage(pageNum, pageSize);
+			//查询条件
+			Map<String,Object> params = new HashMap<String,Object>();
+			PageInfo<TestManagerWayVo> page = (PageInfo<TestManagerWayVo>) testManagerWayServiceImpl.selectByParams(params);
+			
+			reAjaxResult.setPage(page);
+			reAjaxResult.setSuccess(AjaxResult.CODE_SUCCESS);
+			reAjaxResult.setEcode(AjaxResult.E000000);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			reAjaxResult.setSuccess(AjaxResult.CODE_FAIL);
+			reAjaxResult.setMsg(AjaxResult.MSG_REQUEST_FAILURE);
+			reAjaxResult.setEcode(AjaxResult.E000001);
+		}
+    	reAjaxResult.setCommand("listTestManagerWay");
+        return reAjaxResult;   
+    }  
+
+
+}
+

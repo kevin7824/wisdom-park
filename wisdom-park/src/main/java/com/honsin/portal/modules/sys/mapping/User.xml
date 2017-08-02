@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honsin.portal.modules.sys.dao.UserDao">
+
+	<resultMap id="userMap" type="com.honsin.portal.modules.sys.vo.UserVo">
+		<result property="id" column="id"  jdbcType="VARCHAR"/>
+		<result property="company_id" column="companyId"  jdbcType="VARCHAR"/>
+		<result property="office_id" column="officeId"  jdbcType="VARCHAR"/>
+		<result property="login_name" column="loginName"  jdbcType="VARCHAR"/>
+		<result property="password" column="password"  jdbcType="VARCHAR"/>
+		<result property="no" column="no"  jdbcType="VARCHAR"/>
+		<result property="name" column="name"  jdbcType="VARCHAR"/>
+		<result property="email" column="email"  jdbcType="VARCHAR"/>
+		<result property="phone" column="phone"  jdbcType="VARCHAR"/>
+		<result property="mobile" column="mobile"  jdbcType="VARCHAR"/>
+		<result property="user_type" column="userType"  jdbcType="INTEGER"/>
+		<result property="photo" column="photo"  jdbcType="VARCHAR"/>
+		<result property="login_ip" column="loginIp"  jdbcType="VARCHAR"/>
+		<result property="login_date" column="loginDate"  jdbcType="TIMESTAMP"/>
+		<result property="login_flag" column="loginFlag"  jdbcType="VARCHAR"/>
+		<result property="create_by" column="createBy"  jdbcType="VARCHAR"/>
+		<result property="create_date" column="createDate"  jdbcType="TIMESTAMP"/>
+		<result property="update_by" column="updateBy"  jdbcType="VARCHAR"/>
+		<result property="update_date" column="updateDate"  jdbcType="TIMESTAMP"/>
+		<result property="remarks" column="remarks"  jdbcType="VARCHAR"/>
+		<result property="del_flag" column="delFlag"  jdbcType="INTEGER"/>
+		
+	</resultMap>
+	
+	<sql id="allColumns">
+		
+		id AS "id",
+		company_id AS "companyId",
+		office_id AS "officeId",
+		login_name AS "loginName",
+		password AS "password",
+		no AS "no",
+		name AS "name",
+		email AS "email",
+		phone AS "phone",
+		mobile AS "mobile",
+		user_type AS "userType",
+		photo AS "photo",
+		login_ip AS "loginIp",
+		login_date AS "loginDate",
+		login_flag AS "loginFlag",
+		create_by AS "createBy",
+		create_date AS "createDate",
+		update_by AS "updateBy",
+		update_date AS "updateDate",
+		remarks AS "remarks",
+		del_flag AS "delFlag"
+	</sql>
+	
+	<!-- 通过主键查询对象 --> 
+	<select id="get" parameterType="java.lang.String" resultType="com.honsin.portal.modules.sys.vo.UserVo">  
+			select <include refid="allColumns"/>  
+			from  user	 
+			where ID = #{id}  
+	</select> 
+	
+	<!-- 通过对象属性参数查询对象集合 -->
+	<select id="findList" resultType="com.honsin.portal.modules.sys.vo.UserVo" parameterType="com.honsin.portal.modules.sys.vo.UserVo">
+		SELECT <include refid="allColumns"/>  FROM user	
+		<where>
+	
+			<if test="companyId!=null">
+				 and company_id like CONCAT('%','${companyId}','%' )   
+			</if>
+			<if test="officeId!=null">
+				 and office_id like CONCAT('%','${officeId}','%' )   
+			</if>
+			<if test="loginName!=null">
+				 and login_name like CONCAT('%','${loginName}','%' )   
+			</if>
+			<if test="password!=null">
+				 and password like CONCAT('%','${password}','%' )   
+			</if>
+			<if test="no!=null">
+				 and no like CONCAT('%','${no}','%' )   
+			</if>
+			<if test="name!=null">
+				 and name like CONCAT('%','${name}','%' )   
+			</if>
+			<if test="email!=null">
+				 and email like CONCAT('%','${email}','%' )   
+			</if>
+			<if test="phone!=null">
+				 and phone like CONCAT('%','${phone}','%' )   
+			</if>
+			<if test="mobile!=null">
+				 and mobile like CONCAT('%','${mobile}','%' )   
+			</if>
+			<if test="userType!=null">
+				 and user_type = #{userType}
+			</if>
+			<if test="photo!=null">
+				 and photo like CONCAT('%','${photo}','%' )   
+			</if>
+			<if test="loginIp!=null">
+				 and login_ip like CONCAT('%','${loginIp}','%' )   
+			</if>
+			<if test="loginDate!=null">
+				 and login_date like CONCAT('%','${loginDate}','%' )   
+			</if>
+			<if test="loginFlag!=null">
+				 and login_flag like CONCAT('%','${loginFlag}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="remarks!=null">
+				 and remarks like CONCAT('%','${remarks}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+		ORDER BY update_date DESC
+	</select>
+	
+	
+	<!-- 通过封装属性参数查询对象集合 -->
+	<select id="selectByParams" resultType="com.honsin.portal.modules.sys.vo.UserVo" parameterType="Map">
+		SELECT <include refid="allColumns"/>  FROM user	
+		<where>
+	
+			<if test="companyId!=null">
+				 and company_id like CONCAT('%','${companyId}','%' )   
+			</if>
+			<if test="officeId!=null">
+				 and office_id like CONCAT('%','${officeId}','%' )   
+			</if>
+			<if test="loginName!=null">
+				 and login_name like CONCAT('%','${loginName}','%' )   
+			</if>
+			<if test="password!=null">
+				 and password like CONCAT('%','${password}','%' )   
+			</if>
+			<if test="no!=null">
+				 and no like CONCAT('%','${no}','%' )   
+			</if>
+			<if test="name!=null">
+				 and name like CONCAT('%','${name}','%' )   
+			</if>
+			<if test="email!=null">
+				 and email like CONCAT('%','${email}','%' )   
+			</if>
+			<if test="phone!=null">
+				 and phone like CONCAT('%','${phone}','%' )   
+			</if>
+			<if test="mobile!=null">
+				 and mobile like CONCAT('%','${mobile}','%' )   
+			</if>
+			<if test="userType!=null">
+				 and user_type = #{userType}
+			</if>
+			<if test="photo!=null">
+				 and photo like CONCAT('%','${photo}','%' )   
+			</if>
+			<if test="loginIp!=null">
+				 and login_ip like CONCAT('%','${loginIp}','%' )   
+			</if>
+			<if test="loginDate!=null">
+				 and login_date like CONCAT('%','${loginDate}','%' )   
+			</if>
+			<if test="loginFlag!=null">
+				 and login_flag like CONCAT('%','${loginFlag}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="remarks!=null">
+				 and remarks like CONCAT('%','${remarks}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+		ORDER BY update_date DESC
+	</select>
+	
+	<!-- 通过封装属性参数查条数 -->
+	<select id="count" resultType="int" parameterType="Map">
+		SELECT COUNT(ID) FROM user	
+		<where>
+	
+			<if test="companyId!=null">
+				 and company_id like CONCAT('%','${companyId}','%' )   
+			</if>
+			<if test="officeId!=null">
+				 and office_id like CONCAT('%','${officeId}','%' )   
+			</if>
+			<if test="loginName!=null">
+				 and login_name like CONCAT('%','${loginName}','%' )   
+			</if>
+			<if test="password!=null">
+				 and password like CONCAT('%','${password}','%' )   
+			</if>
+			<if test="no!=null">
+				 and no like CONCAT('%','${no}','%' )   
+			</if>
+			<if test="name!=null">
+				 and name like CONCAT('%','${name}','%' )   
+			</if>
+			<if test="email!=null">
+				 and email like CONCAT('%','${email}','%' )   
+			</if>
+			<if test="phone!=null">
+				 and phone like CONCAT('%','${phone}','%' )   
+			</if>
+			<if test="mobile!=null">
+				 and mobile like CONCAT('%','${mobile}','%' )   
+			</if>
+			<if test="userType!=null">
+				 and user_type = #{userType}
+			</if>
+			<if test="photo!=null">
+				 and photo like CONCAT('%','${photo}','%' )   
+			</if>
+			<if test="loginIp!=null">
+				 and login_ip like CONCAT('%','${loginIp}','%' )   
+			</if>
+			<if test="loginDate!=null">
+				 and login_date like CONCAT('%','${loginDate}','%' )   
+			</if>
+			<if test="loginFlag!=null">
+				 and login_flag like CONCAT('%','${loginFlag}','%' )   
+			</if>
+			<if test="createBy!=null">
+				 and create_by like CONCAT('%','${createBy}','%' )   
+			</if>
+			<if test="createDate!=null">
+				 and create_date like CONCAT('%','${createDate}','%' )   
+			</if>
+			<if test="updateBy!=null">
+				 and update_by like CONCAT('%','${updateBy}','%' )   
+			</if>
+			<if test="updateDate!=null">
+				 and update_date like CONCAT('%','${updateDate}','%' )   
+			</if>
+			<if test="remarks!=null">
+				 and remarks like CONCAT('%','${remarks}','%' )   
+			</if>
+			<if test="delFlag!=null">
+				 and del_flag = #{delFlag}
+			</if>
+		
+		</where>
+	</select>
+	
+	<!-- 添加记录 -->
+	<insert id="insert" parameterType="com.honsin.portal.modules.sys.vo.UserVo">
+		INSERT INTO user	 (
+				id 
+			<if test="companyId!=null">
+				,company_id
+			</if>
+			<if test="officeId!=null">
+				,office_id
+			</if>
+			<if test="loginName!=null">
+				,login_name
+			</if>
+			<if test="password!=null">
+				,password
+			</if>
+			<if test="no!=null">
+				,no
+			</if>
+			<if test="name!=null">
+				,name
+			</if>
+			<if test="email!=null">
+				,email
+			</if>
+			<if test="phone!=null">
+				,phone
+			</if>
+			<if test="mobile!=null">
+				,mobile
+			</if>
+			<if test="userType!=null">
+				,user_type
+			</if>
+			<if test="photo!=null">
+				,photo
+			</if>
+			<if test="loginIp!=null">
+				,login_ip
+			</if>
+			<if test="loginDate!=null">
+				,login_date
+			</if>
+			<if test="loginFlag!=null">
+				,login_flag
+			</if>
+			<if test="createBy!=null">
+				,create_by
+			</if>
+			<if test="createDate!=null">
+				,create_date
+			</if>
+			<if test="updateBy!=null">
+				,update_by
+			</if>
+			<if test="updateDate!=null">
+				,update_date
+			</if>
+			<if test="remarks!=null">
+				,remarks
+			</if>
+			<if test="delFlag!=null">
+				,del_flag
+			</if>
+		)
+		VALUES
+		(
+				#{id} 
+			<if test="companyId!=null">
+				,#{companyId}
+			</if>
+			<if test="officeId!=null">
+				,#{officeId}
+			</if>
+			<if test="loginName!=null">
+				,#{loginName}
+			</if>
+			<if test="password!=null">
+				,#{password}
+			</if>
+			<if test="no!=null">
+				,#{no}
+			</if>
+			<if test="name!=null">
+				,#{name}
+			</if>
+			<if test="email!=null">
+				,#{email}
+			</if>
+			<if test="phone!=null">
+				,#{phone}
+			</if>
+			<if test="mobile!=null">
+				,#{mobile}
+			</if>
+			<if test="userType!=null">
+				,#{userType}
+			</if>
+			<if test="photo!=null">
+				,#{photo}
+			</if>
+			<if test="loginIp!=null">
+				,#{loginIp}
+			</if>
+			<if test="loginDate!=null">
+				,#{loginDate}
+			</if>
+			<if test="loginFlag!=null">
+				,#{loginFlag}
+			</if>
+			<if test="createBy!=null">
+				,#{createBy}
+			</if>
+			<if test="createDate!=null">
+				,#{createDate}
+			</if>
+			<if test="updateBy!=null">
+				,#{updateBy}
+			</if>
+			<if test="updateDate!=null">
+				,#{updateDate}
+			</if>
+			<if test="remarks!=null">
+				,#{remarks}
+			</if>
+			<if test="delFlag!=null">
+				,#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<!-- 修改记录 -->
+	<update id="update" parameterType="com.honsin.portal.modules.sys.vo.UserVo">
+		UPDATE user	 
+		<set>
+		
+			<if test="companyId!=null">
+				company_id = #{companyId},
+			</if>
+			<if test="officeId!=null">
+				office_id = #{officeId},
+			</if>
+			<if test="loginName!=null">
+				login_name = #{loginName},
+			</if>
+			<if test="password!=null">
+				password = #{password},
+			</if>
+			<if test="no!=null">
+				no = #{no},
+			</if>
+			<if test="name!=null">
+				name = #{name},
+			</if>
+			<if test="email!=null">
+				email = #{email},
+			</if>
+			<if test="phone!=null">
+				phone = #{phone},
+			</if>
+			<if test="mobile!=null">
+				mobile = #{mobile},
+			</if>
+			<if test="userType!=null">
+				user_type = #{userType},
+			</if>
+			<if test="photo!=null">
+				photo = #{photo},
+			</if>
+			<if test="loginIp!=null">
+				login_ip = #{loginIp},
+			</if>
+			<if test="loginDate!=null">
+				login_date = #{loginDate},
+			</if>
+			<if test="loginFlag!=null">
+				login_flag = #{loginFlag},
+			</if>
+			<if test="createBy!=null">
+				create_by = #{createBy},
+			</if>
+			<if test="createDate!=null">
+				create_date = #{createDate},
+			</if>
+			<if test="updateBy!=null">
+				update_by = #{updateBy},
+			</if>
+			<if test="updateDate!=null">
+				update_date = #{updateDate},
+			</if>
+			<if test="remarks!=null">
+				remarks = #{remarks},
+			</if>
+			<if test="delFlag!=null">
+				del_flag = #{delFlag}
+			</if>
+		
+		</set> 
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 逻辑删除数据 -->
+	<update id="deleteByMark" parameterType="com.honsin.portal.modules.sys.vo.UserVo">
+        UPDATE user	 SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 物理删除数据 -->
+	<delete id="deleteByPhysic" parameterType="java.lang.String">
+        DELETE FROM user	 WHERE id=#{id}
+    </delete>
+    
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.honsin.portal.modules.sys.vo.UserVo">
+		SELECT A.ID, A.PASSWORD FROM USER A  WHERE A.login_name=#{loginName}
+	</select>
+</mapper>

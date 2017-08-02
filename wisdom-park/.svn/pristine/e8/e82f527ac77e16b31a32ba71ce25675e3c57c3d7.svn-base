@@ -1,0 +1,26 @@
+package com.honsin.portal.modules.project.dao;
+
+import com.honsin.portal.common.dao.BaseDao;
+import com.honsin.portal.modules.project.vo.TestManagerWayVo;
+
+/**
+ * @deprecated: 本类是与测试管理办法相关联的dao的接口
+ * 
+ * Function List: 常用方法
+ * 
+ * @version: Ver. 1.0
+ * 
+ * @since: Ver. 1.0
+ * 
+ * @author: cd
+ * 
+ * History:
+ * (author)          (time)            (version)               (desc)
+ * 	cd             2017-07-31         1.0                     初始化
+ */
+
+
+public interface TestManagerWayDao extends BaseDao<TestManagerWayVo>{
+
+   
+}

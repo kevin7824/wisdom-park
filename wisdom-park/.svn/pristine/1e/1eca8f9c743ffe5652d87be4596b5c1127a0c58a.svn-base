@@ -1,0 +1,25 @@
+package com.honsin.portal.modules.project.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import com.honsin.portal.common.service.impl.BaseServiceImpl;
+import org.springframework.stereotype.Service;
+import com.honsin.portal.modules.project.vo.TestManagerWayVo;
+import com.honsin.portal.modules.project.service.TestManagerWayService;
+import com.honsin.portal.modules.project.dao.TestManagerWayDao;
+
+/**
+ * @deprecated: 本类是与测试管理办法相关联的业务类
+ * Function List: 常用方法
+ * History:
+ * (author)          (time)            (version)               (desc)
+ * 	cd              2017-07-31         1.0                     初始化
+ */
+@Service("testManagerWayServiceImpl")
+public class TestManagerWayServiceImpl extends BaseServiceImpl<TestManagerWayVo> implements TestManagerWayService{ 
+	
+	@Autowired
+	public void setBaseDao(TestManagerWayDao testManagerWayDao){
+		super.baseDao = testManagerWayDao;
+	}
+}
+

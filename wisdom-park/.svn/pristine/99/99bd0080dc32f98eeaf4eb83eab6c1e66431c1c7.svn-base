@@ -1,0 +1,37 @@
+package com.honsin.portal.modules.project.entity;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import com.honsin.portal.common.entity.BaseModel;
+
+/**
+ * @deprecated: 本类是与测试管理办法相关联的BO类
+ * 
+ * Function List: 常用方法
+ * 
+ * @version: Ver. 1.0
+ * 
+ * @author: cd
+ * 
+ * History:
+ * (author)          (time)            (version)               (desc)
+ * 	cd              2017-07-31         1.0                     初始化
+ */
+
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class TestManagerWay extends BaseModel{
+
+	private static final long serialVersionUID = 1L;
+
+	private String id;				//ID
+	private String fileName;				//文件名称
+	private String version;				//版本号
+	private String comment;				//备注
+	private String downloadUserIds;				//指定下载人
+	private String attachmentIds;				//多个文件
+	private Integer downloadCount;				//下载次数
+	
+	
+}
